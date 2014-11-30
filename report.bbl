@@ -1,0 +1,17 @@
+\begin{thebibliography}{1}
+
+\bibitem{Code}
+Jerry Chou.
+\newblock Matlab code for this homework.
+
+\bibitem{QSS07}
+Sacco~R. Quarteroni~A. and Saleri F.
+\newblock {\em Numerical Mathematics}.
+\newblock Springer-Verlag, Berlin, 2007.
+
+\bibitem{CG}
+Jonathan~Richard Shewchuk.
+\newblock An introduction to the conjugate method without agonizing pain.
+\newblock August 1994.
+
+\end{thebibliography}

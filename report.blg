@@ -1,0 +1,11 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: report.aux
+The style file: plain.bst
+Database file #1: Thesis.bib
+Name 1 in "Quarteroni A., Sacco R., and Saleri F." has a comma at the end for entry QSS07
+while executing---line 1049 of file plain.bst
+Warning--empty journal in Code
+Warning--empty year in Code
+Name 1 in "Quarteroni A., Sacco R., and Saleri F." has a comma at the end for entry QSS07
+while executing---line 1090 of file plain.bst
+Warning--empty journal in CG
+(There were 2 error messages)
