@@ -323,6 +323,72 @@ For PCG algorithm using different preconditioners. When using incomplete Cholesk
 
 \section{Reordering}
 
+Our results when using reordering are not significantly improved. We believe that it is stemmed from the core of the algorithm. In the following discussion, we first compare the convergence rate before and after the reordering process. Then talk a little about storage issues. At last, we dig into the core of Gauss-Seidel algorithm and PCG algorithm respectively to see how reordering affects the elapsed time.
+
+\subsection{Convergence Rate}
+Let's consider the convergence rate before and after the reordering process. We simply calculate the condition number of both original iteration matrix and reordered iteration matrix. The results were the same! Which means that the convergence rate will be the same after reordering the iteration matrix. This analysis result gives a clear answer to why we got a similar results on whether using reordering or not.
+
+\subsection{Storage}
+Since the main process in both algorithm will be the same after reordering the iteration matrix, the additional storage will only happens in the reordered result. That is the vector the stores the reordered pattern. Thus, the storage before and after the reordering process will not grow significantly.
+
+
+\subsection{Elapsed Time in Gauss-Seidel Algorithm}
+For Gauss-Seidel algorithm, the iteration is somehow like a backward substitution in LU factorization. However, the algorithm doesn't have the factorization process and doesn't create new fill-in. As a result, it's clearly that when using reordering, the the number of arithmetical operations will nearly be the same. The performance will not improved in the elapsed time of iterations. 
+
+
+\subsection{Elapsed Time in PCG Algorithm}
+The main arithmetical operations in PCG algorithm has three parts. The first part is matrix vector multiplications, which will not be greatly affected by the reordered result. The second part is solving the preconditioned linear system. Whether we calculate the inverse matrix in advance or using backward substitution in each iteration, the most important factor who affect the elapsed time is the number of non-zero elements in iteration matrix. The followings are the number of non-zero elements before and after the reordering process.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{lcccccc}
+\hline
+Method & Size = 9 & Size = 49 & Size = 225 & Size = 961 & Size = 3969 & Size = 16129\\
+\hline
+Before & 45 & 341 & 1749 & 7829 & 33045 & 135701\\
+After & 41 & 325 & 1745 & 7965 & 33865 & 139529\\
+\hline
+\end{tabular}
+\caption{Number of non-zero elements before and after the reordering process}
+\end{center}
+\end{table}
+
+We can see that the number of non-zero elements in iteration matrix before and after the reordering process is very close. When the size of the system grows larger, the number of non-zero elements even are smaller without reordering. From this observation, we can conclude that the reordering process doesn't affect the elapsed time of the algorithm much.
+
+Last but not the least, the elapsed time for incomplete Cholesky factorization is also concerned. However, in this homework, the elapsed time for incomplete Cholesky factorization is at $10^{-3}$ level, which is at noise level and doesn't affect the result much.
+
+\paragraph{}
+Conclude the above statements and analysis, we found out that the reordering process doesn't affect the result of the dataset in this homework.
+
+\section{Problem 4}
+
+Consider SIM
+$$Mx^{(k+1)}=Nx^{(k)} + b$$
+
+or
+$$x^{(k+1)} = M^{-1}Nx^{(k)} + M^{-1}b$$
+
+Show that
+$$x^{(k+1)} = x^{(k)} + M^{-1}r^{(k)}$$
+
+and therefore the step the SIM takes is
+$$x^{(k+1)}-x^{(k)}=M^{-1}r^{(k)}$$
+$sol:$
+
+By the definition of residual we know that
+$$r^{(k)} = b - Ax^{(k)}$$
+
+and the relationship between $M$,$N$,and$A$
+$$A = M-N$$
+
+
+replace $N$ with $M-A$ we got
+$$x^{(k+1)} = M^{-1}(M-A)x^{(k)} + M^{-1}b$$
+$$x^{(k+1)} = x^{(k)} - M^{-1}Ax^{(k)} + M^{-1}b$$
+$$x^{(k+1)}-x^{(k)}=M^{-1}(b-x^{(k)})$$
+
+Finally, we got
+$$x^{(k+1)}-x^{(k)}=M^{-1}r^{(k)}$$
 
 \section{Remarks}
 
